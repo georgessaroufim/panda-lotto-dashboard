@@ -159,8 +159,8 @@ const Login = () => {
 
                         <Typography sx={{ mt: 5 }} variant="body2" color="text.secondary" align="center">
                             {(I18nManager.isRTL() ? "حقوق النشر" : "Copyright") + ' ©'}
-                            <Link color="inherit" href="https://pandaloto.com/">
-                                PandaLoto.com
+                            <Link color="inherit" href="http://pandalotto.com/">
+                                PandaLotto.com
                             </Link>{' '}
                             {new Date().getFullYear()}
                         </Typography>
