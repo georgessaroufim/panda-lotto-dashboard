@@ -1,0 +1,2 @@
+Created .env file and added GENERATE_SOURCEMAP=false to remove webpack warning 
+of stylis package (stats.errorDetails = true)
