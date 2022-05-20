@@ -27,7 +27,7 @@ const ThemeCustomization = ({ children }) => {
                 },
                 mode: prefersDarkMode ? 'dark' : 'light',
             },
-            direction: (dir == 'rtl' || dir == 'ltr') ? dir : 'rtl'
+            direction: 'ltr'
         }),
         [prefersDarkMode, dir],
     );

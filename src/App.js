@@ -3,7 +3,6 @@ import React, { useEffect, useState, useContext, lazy } from 'react'
 import './App.css';
 import { Route, BrowserRouter, useLocation, Routes, useNavigate, } from 'react-router-dom';
 import I18nManager from './core/I18nManager/I18nManager';
-import { Helmet } from 'react-helmet-async'
 import ThemeCustomization from './core/theme-customization/ThemeCustomization';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -76,60 +75,11 @@ const PreLoader = () => {
   )
 }
 
-const ScrollToTop = () => {
-  let navigate = useNavigate()
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    const hash = window.location.hash
-    // check URL prefix
-    if ((window.location.pathname.startsWith("/en") && I18nManager.isRTL()) ||
-      (window.location.pathname.startsWith("/ar") && !I18nManager.isRTL())) {
-      const path = window.location.pathname.split('/')
-      let result = '/'
-      path.forEach((element, i) => {
-        result += (i > 1) ? (element + (i < path?.length - 1 ? '/' : '')) : ''
-      });
-      navigate(result)
-      if (hash) {
-        window.location.href = result.split('/').pop() + hash
-      }
-    }
-  }, [pathname])
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (sessionStorage.getItem('anchor')) {
-      setTimeout(() => {
-        window.location.href = '#' + sessionStorage.getItem('anchor')
-        sessionStorage.removeItem('anchor')
-      }, 500);
-    }
-    if (pathname !== '/login') {
-      // sessionStorage.setItem('return_url', pathname)
-    }
-  }, [pathname]);
-
-  return null;
-}
-
 const App = () => {
   const { paths } = useContext(RouteContext)
-
-  useEffect(() => {
-    if (window.location.pathname == "/") {
-      window.location.href = (I18nManager.isRTL() ? "/ar" : "/en") + "/reports"
-    }
-  }, [window.location.pathname])
-
-
   return (
-    <BrowserRouter basename={I18nManager.isRTL() ? "/ar" : "/en"}>
-      <Helmet>
-        <link rel="canonical" href={window.location.href} />
-      </Helmet>
+    <BrowserRouter>
       <RequestErrorMessage />
-      <ScrollToTop />
       <PreLoader />
       <ThemeCustomization>
         <ViewContainer>
